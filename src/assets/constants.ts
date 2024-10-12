@@ -1,0 +1,13 @@
+export const COLOR_CONSTANTS = {
+  STATUS_BAR: '#76ABAE',
+  SECONDARY: '#31363F',
+  HEADER_TEXT: '#EEEEEE',
+  PRIMARY: '#222831',
+  TEXT_SECONDARY: '#A5B68D',
+  TEXT_PRIMARY: '#8967B3',
+  TEXT_VIBRANT_PRIMARY: '#A594F9',
+};
+
+export const HEADER = {
+  TITLE: '.days_since',
+};
