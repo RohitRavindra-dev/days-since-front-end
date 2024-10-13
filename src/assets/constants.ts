@@ -3,11 +3,19 @@ export const COLOR_CONSTANTS = {
   SECONDARY: '#31363F',
   HEADER_TEXT: '#EEEEEE',
   PRIMARY: '#222831',
-  TEXT_SECONDARY: '#A5B68D',
-  TEXT_PRIMARY: '#8967B3',
+  TEXT_SECONDARY: '#183D3D',
+  TEXT_PRIMARY: '#008170',
   TEXT_VIBRANT_PRIMARY: '#A594F9',
 };
 
 export const HEADER = {
   TITLE: '.days_since',
+};
+
+export const GOAL = {
+  DAYS: 'Days',
+  DAY: 'Day',
+  MAX_STREAK: 'Max Streak',
+  CUR_STREAK: 'Current Streak',
+  LAST_UPDATED: 'Last updated:',
 };

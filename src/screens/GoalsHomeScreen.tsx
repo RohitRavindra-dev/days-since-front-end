@@ -2,25 +2,17 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {COLOR_CONSTANTS} from '../assets/constants';
 import {GoalCard} from '../components/goal-card/GoalCard';
+import {dummyGoals} from '../assets/data/dummyGoals';
 
 export const GoalsHomeScreen = () => {
   return (
     <ScrollView style={screenStyles.body}>
-      <View style={screenStyles.cardCntr}>
-        <GoalCard />
-      </View>
-      <View style={screenStyles.cardCntr}>
-        <GoalCard />
-      </View>
-      <View style={screenStyles.cardCntr}>
-        <GoalCard />
-      </View>
-      <View style={screenStyles.cardCntr}>
-        <GoalCard />
-      </View>
-      <View style={screenStyles.cardCntr}>
-        <GoalCard />
-      </View>
+      {dummyGoals.map((goal, index) => (
+        <View style={screenStyles.cardCntr} id={`${index}`}>
+          <GoalCard {...goal} />
+        </View>
+      ))}
+
       <View style={{height: 100}}></View>
     </ScrollView>
   );
@@ -35,6 +27,6 @@ const screenStyles = StyleSheet.create({
     paddingVertical: 18,
   },
   cardCntr: {
-    paddingBottom: 16,
+    paddingBottom: 18,
   },
 });
