@@ -1,13 +1,19 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {Pressable, ScrollView, StyleSheet, View} from 'react-native';
 import {COLOR_CONSTANTS} from '../assets/constants';
 import {GoalCard} from '../components/goal-card/GoalCard';
 import {dummyGoals} from '../assets/data/dummyGoals';
 import {AddGoalFab} from '../components/fab/AddGoalFab';
+import {AddModal} from '../components/add-modal/AddModal';
 
 export const GoalsHomeScreen = () => {
+  const [isAddingGoal, setisAddingGoal] = useState(false);
+  const toggleAddModal = () => {
+    console.log('Toggleing modal');
+    setisAddingGoal(prev => !prev);
+  };
   return (
-    <View style={screenStyles.body}>
+    <View style={[screenStyles.body, {opacity: isAddingGoal ? 0.75 : 1}]}>
       <ScrollView style={screenStyles.goalsList}>
         {dummyGoals.map((goal, index) => (
           <View style={screenStyles.cardCntr} id={`${index}`}>
@@ -22,7 +28,8 @@ export const GoalsHomeScreen = () => {
 
         <View style={{height: 100}}></View>
       </ScrollView>
-      <AddGoalFab />
+      {!isAddingGoal && <AddGoalFab onClick={toggleAddModal} />}
+      <AddModal isOpen={isAddingGoal} onClose={toggleAddModal} />
     </View>
   );
 };

@@ -3,13 +3,13 @@ import {Alert, Pressable, View} from 'react-native';
 import {addFabStyles as as} from './styles';
 import AddIcon from '../../assets/svgs/AddIcon';
 
-export const AddGoalFab = () => {
+type AddGoalFabProps = {
+  onClick: () => void;
+};
+
+export const AddGoalFab = ({onClick}: AddGoalFabProps) => {
   return (
-    <Pressable
-      style={as.fabCntr}
-      onPress={() => {
-        Alert.alert('Add clicked', 'Feature is upcoming');
-      }}>
+    <Pressable style={as.fabCntr} onPress={onClick}>
       <AddIcon />
     </Pressable>
   );
