@@ -11,14 +11,18 @@ import {StatusBar, View} from 'react-native';
 import {COLOR_CONSTANTS} from './src/assets/constants';
 import {AppHeader} from './src/components/header/AppHeader';
 import {GoalsHomeScreen} from './src/screens/GoalsHomeScreen';
+import {Provider} from 'react-redux';
+import {store} from './src/store/highCommand';
 
 const App = (): React.JSX.Element => {
   return (
-    <View style={{height: '100%', width: '100%'}}>
-      <StatusBar backgroundColor={COLOR_CONSTANTS.STATUS_BAR} />
-      <AppHeader />
-      <GoalsHomeScreen />
-    </View>
+    <Provider store={store}>
+      <View style={{height: '100%', width: '100%'}}>
+        <StatusBar backgroundColor={COLOR_CONSTANTS.STATUS_BAR} />
+        <AppHeader />
+        <GoalsHomeScreen />
+      </View>
+    </Provider>
   );
 };
 
