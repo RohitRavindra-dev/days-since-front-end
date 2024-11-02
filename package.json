@@ -9,10 +9,12 @@
     "start": "react-native start",
     "test": "jest",
     "version": "react-native -v",
+    "gradle:refresh": "cd android && gradlew clean && gradlew build && cd ..",
     "bundle": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.8",
+    "axios": "^1.7.7",
     "react": "18.3.1",
     "react-native": "0.75.4",
     "react-native-svg": "^15.7.1",

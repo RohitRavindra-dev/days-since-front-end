@@ -91,7 +91,7 @@ export const holdButtonStyles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    backgroundColor: '#EBD3F8',
+    backgroundColor: '#9290C3',
     padding: 12,
     borderWidth: 3,
     borderColor: '#2E073F',

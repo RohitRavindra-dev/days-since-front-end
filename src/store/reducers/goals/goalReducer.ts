@@ -1,38 +1,37 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {GoalInfoDto} from '../../../dtos/GoalDto';
+import {API_STATUS, ApiState} from '../../../dtos/ApiStatusDto';
+import {
+  failedGoalsFetchAction,
+  setGoalsAction,
+  startLoadingAction,
+} from './actions';
 
 export interface GoalsState {
   goalsList: GoalInfoDto[];
-  count: number;
+  fetchStatus: ApiState;
 }
 
 const initialState: GoalsState = {
   goalsList: [],
-  count: 0,
+  fetchStatus: {
+    status: API_STATUS.IDLE,
+  },
 };
 
 export const goalsSlice = createSlice({
   name: 'goals',
   initialState,
   reducers: {
-    increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.count += 1;
-    },
-    decrement: state => {
-      state.count -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.count += action.payload;
-    },
+    startGoalsFetch: startLoadingAction,
+    goalsFetched: setGoalsAction,
+    goalsFetchFailed: failedGoalsFetchAction,
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {increment, decrement, incrementByAmount} = goalsSlice.actions;
+export const {startGoalsFetch, goalsFetchFailed, goalsFetched} =
+  goalsSlice.actions;
 
 export default goalsSlice.reducer;

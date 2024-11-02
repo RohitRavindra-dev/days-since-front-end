@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import {goalCardStyles as gs} from './styles';
 import {GOAL} from '../../assets/constants';
 import {HoldToTrigger} from './action-buttons/HoldToTrigger';
@@ -41,7 +41,18 @@ export const GoalCard = ({
         </View>
       </View>
       <View style={gs.actionContainer}>
-        <HoldToTrigger isIncrementer={isAutoIncremented} />
+        <HoldToTrigger
+          isIncrementer={isAutoIncremented}
+          goalId={goalId}
+          onCompletionHandler={(goalId: string, isIncrement: boolean) => {
+            Alert.alert(
+              `Goal id: ${goalId} has been ${
+                isIncrement ? 'Incremented' : 'Reset'
+              }`,
+              'Done bro, now let go!',
+            );
+          }}
+        />
       </View>
     </View>
   );
