@@ -1,12 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
+import {GoalInfoDto} from '../../../dtos/GoalDto';
 
 export interface GoalsState {
-  goalsList: number;
+  goalsList: GoalInfoDto[];
+  count: number;
 }
 
 const initialState: GoalsState = {
-  goalsList: 0,
+  goalsList: [],
+  count: 0,
 };
 
 export const goalsSlice = createSlice({
@@ -18,13 +21,13 @@ export const goalsSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.goalsList += 1;
+      state.count += 1;
     },
     decrement: state => {
-      state.goalsList -= 1;
+      state.count -= 1;
     },
     incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.goalsList += action.payload;
+      state.count += action.payload;
     },
   },
 });

@@ -1,6 +1,6 @@
-import {GoalCardProps} from '../../components/goal-card/GoalCard';
+import {GoalInfoDto} from '../../dtos/GoalDto';
 
-export const dummyGoals: GoalCardProps[] = [
+export const dummyGoals: GoalInfoDto[] = [
   {
     goalId: 'eb9997bb-5dea-5a51-8ba2-9642335b4714',
     goalName: 'Sandyavandne',

@@ -2,15 +2,8 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {goalCardStyles as gs} from './styles';
 import {GOAL} from '../../assets/constants';
-
-export type GoalCardProps = {
-  goalId: string;
-  goalName: string;
-  currentStreak: number;
-  maxStreak: number;
-  lastUpdated: string;
-  isAutoIncremented: boolean;
-};
+import {HoldToTrigger} from './action-buttons/HoldToTrigger';
+import {GoalInfoDto} from '../../dtos/GoalDto';
 
 export const GoalCard = ({
   goalName,
@@ -18,7 +11,8 @@ export const GoalCard = ({
   currentStreak,
   maxStreak,
   lastUpdated,
-}: GoalCardProps) => {
+  isAutoIncremented,
+}: GoalInfoDto) => {
   return (
     <View style={gs.card}>
       <View style={gs.cardContents}>
@@ -45,6 +39,9 @@ export const GoalCard = ({
               gs.lastUpdated
             }>{`${GOAL.LAST_UPDATED} ${lastUpdated}`}</Text>
         </View>
+      </View>
+      <View style={gs.actionContainer}>
+        <HoldToTrigger isIncrementer={isAutoIncremented} />
       </View>
     </View>
   );

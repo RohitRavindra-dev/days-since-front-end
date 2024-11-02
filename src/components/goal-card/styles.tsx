@@ -7,7 +7,6 @@ export const goalCardStyles = StyleSheet.create({
     width: '100%',
     padding: 16,
     borderRadius: 5,
-    flexDirection: 'row',
   },
   cardContents: {
     flex: 1,
@@ -77,5 +76,37 @@ export const goalCardStyles = StyleSheet.create({
   lastUpdated: {
     color: '#EBD3F8',
     fontSize: 12,
+  },
+  actionContainer: {
+    width: '100%',
+    paddingTop: 12,
+  },
+});
+
+export const holdButtonStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  button: {
+    backgroundColor: '#EBD3F8',
+    padding: 12,
+    borderWidth: 3,
+    borderColor: '#2E073F',
+    width: '100%',
+    borderRadius: 12,
+  },
+  text: {
+    color: '#2E073F',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  bgFill: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    borderRadius: 10,
   },
 });

@@ -5,6 +5,7 @@ import {GoalCard} from '../components/goal-card/GoalCard';
 import {dummyGoals} from '../assets/data/dummyGoals';
 import {AddGoalFab} from '../components/fab/AddGoalFab';
 import {AddModal} from '../components/add-modal/AddModal';
+import {Counter} from '../components/dummyCounter/dummyCounter';
 
 export const GoalsHomeScreen = () => {
   const [isAddingGoal, setisAddingGoal] = useState(false);

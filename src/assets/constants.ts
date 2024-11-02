@@ -18,4 +18,9 @@ export const GOAL = {
   MAX_STREAK: 'Max Streak',
   CUR_STREAK: 'Current Streak',
   LAST_UPDATED: 'Last updated:',
+  ACTIONS: {
+    PRESS_AND_HOLD: 'Press and Hold Me to',
+    INCREMENT: 'Increment Goal',
+    DECREMENT: 'Reset Goal',
+  },
 };
