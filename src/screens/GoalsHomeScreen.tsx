@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchGoalsList} from '../store/reducers/goals/thunks';
 import {AppDispatch, RootState} from '../store/highCommand';
 import {API_STATUS} from '../dtos/ApiStatusDto';
+import {TechnicalErrorScreen} from './TechnicalErrorScreen';
 
 export const GoalsHomeScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,19 +26,28 @@ export const GoalsHomeScreen = () => {
     dispatch(fetchGoalsList());
   }, [dispatch]);
 
+  const refreshHandler = () => {
+    dispatch(fetchGoalsList());
+  };
+
   return (
     <View style={[screenStyles.body, {opacity: isAddingGoal ? 0.75 : 1}]}>
-      {fetchStatus.status === API_STATUS.LOADING && (
-        <Text>App is Loading!</Text>
+      {fetchStatus.status === API_STATUS.ERROR ? (
+        <TechnicalErrorScreen retryCallback={refreshHandler} />
+      ) : (
+        <ScrollView style={screenStyles.goalsList}>
+          {fetchStatus.status === API_STATUS.LOADING ? (
+            <Text>App is Loading!</Text>
+          ) : (
+            goalsList.map((goal, index) => (
+              <View style={screenStyles.cardCntr} id={`${index}`}>
+                <GoalCard {...goal} />
+              </View>
+            ))
+          )}
+          <View style={{height: 200}}></View>
+        </ScrollView>
       )}
-      <ScrollView style={screenStyles.goalsList}>
-        {goalsList.map((goal, index) => (
-          <View style={screenStyles.cardCntr} id={`${index}`}>
-            <GoalCard {...goal} />
-          </View>
-        ))}
-        <View style={{height: 200}}></View>
-      </ScrollView>
       {!isAddingGoal && <AddGoalFab onClick={toggleAddModal} />}
       <AddModal isOpen={isAddingGoal} onClose={toggleAddModal} />
     </View>

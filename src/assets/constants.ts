@@ -24,3 +24,8 @@ export const GOAL = {
     DECREMENT: 'Reset Goal',
   },
 };
+
+export const ERROR_CONSTANTS = {
+  TITLE: 'Some Technical Error has occured!\nPlease try refreshing',
+  REFRESH: 'Refresh',
+};
