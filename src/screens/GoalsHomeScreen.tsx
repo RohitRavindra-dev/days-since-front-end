@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {COLOR_CONSTANTS} from '../assets/constants';
 import {GoalCard} from '../components/goal-card/GoalCard';
 import {dummyGoals} from '../assets/data/dummyGoals';
@@ -17,6 +24,13 @@ export const GoalsHomeScreen = () => {
     (state: RootState) => state.goals,
   );
   const [isAddingGoal, setisAddingGoal] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    dispatch(fetchGoalsList());
+  }, []);
+
   const toggleAddModal = () => {
     console.log('Toggleing modal');
     setisAddingGoal(prev => !prev);
@@ -25,6 +39,13 @@ export const GoalsHomeScreen = () => {
   useEffect(() => {
     dispatch(fetchGoalsList());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (fetchStatus.status != API_STATUS.LOADING) {
+      setRefreshing(false);
+    }
+    console.log('Goals home: ', goalsList);
+  }, [fetchStatus]);
 
   const refreshHandler = () => {
     dispatch(fetchGoalsList());
@@ -35,7 +56,11 @@ export const GoalsHomeScreen = () => {
       {fetchStatus.status === API_STATUS.ERROR ? (
         <TechnicalErrorScreen retryCallback={refreshHandler} />
       ) : (
-        <ScrollView style={screenStyles.goalsList}>
+        <ScrollView
+          style={screenStyles.goalsList}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           {fetchStatus.status === API_STATUS.LOADING ? (
             <Text>App is Loading!</Text>
           ) : (

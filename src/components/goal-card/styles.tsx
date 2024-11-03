@@ -17,6 +17,23 @@ export const goalCardStyles = StyleSheet.create({
     fontWeight: '600',
     textTransform: 'capitalize',
   },
+  autoIncrementBadge: {
+    position: 'absolute',
+    right: -1,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    backgroundColor: '#555',
+    elevation: 2,
+    borderRadius: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 2,
+  },
+  autoIncrText: {
+    color: 'white',
+    flexWrap: 'wrap',
+    overflow: 'visible',
+  },
   streaksFlex: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -26,7 +43,7 @@ export const goalCardStyles = StyleSheet.create({
   },
   streakCntr: {
     paddingVertical: 8,
-    backgroundColor: '#9EC8B9',
+    backgroundColor: '#9290C3',
     flex: 1.4,
     paddingHorizontal: 8,
 
@@ -91,7 +108,7 @@ export const holdButtonStyles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    backgroundColor: '#9290C3',
+    backgroundColor: '#9EC8B9',
     padding: 12,
     borderWidth: 3,
     borderColor: '#2E073F',
@@ -101,7 +118,7 @@ export const holdButtonStyles = StyleSheet.create({
   text: {
     color: '#2E073F',
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '700',
   },
   bgFill: {
     position: 'absolute',

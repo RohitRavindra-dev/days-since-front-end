@@ -19,13 +19,13 @@ const COLORS_RESET = ['rgb(255,255,255)', 'rgb(235, 62, 62)'];
 
 export type HoldActionTypes = {
   goalId: string;
-  isIncrementer: boolean;
+  isReseter: boolean;
   onCompletionHandler: (goalId: string, isIncrementAction: boolean) => void;
 };
 
 export const HoldToTrigger = ({
   goalId,
-  isIncrementer = true,
+  isReseter = true,
   onCompletionHandler = () => {},
 }: HoldActionTypes) => {
   const [buttonWidth, setButtonWidth] = useState<number>(0);
@@ -59,8 +59,8 @@ export const HoldToTrigger = ({
   };
 
   const animationActionComplete = () => {
-    Vibration.vibrate();
-    onCompletionHandler(goalId, isIncrementer);
+    // Vibration.vibrate();
+    onCompletionHandler(goalId, isReseter);
   };
 
   const getButtonWidthLayout = (e: LayoutChangeEvent) => {
@@ -75,9 +75,9 @@ export const HoldToTrigger = ({
     });
     const bgColor = pressAction.interpolate({
       inputRange: [0, 1],
-      outputRange: isIncrementer
-        ? (COLORS_INCREMENT as any)
-        : (COLORS_RESET as any), // Type assertion for color interpolation
+      outputRange: isReseter
+        ? (COLORS_RESET as any)
+        : (COLORS_INCREMENT as any), // Type assertion for color interpolation
     });
     return {
       width: width,
@@ -91,11 +91,17 @@ export const HoldToTrigger = ({
       <TouchableWithoutFeedback
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}>
-        <View style={hbs.button} onLayout={getButtonWidthLayout}>
+        <View
+          style={{
+            ...hbs.button,
+            backgroundColor: isReseter ? '#872341' : '#9EC8B9',
+          }}
+          onLayout={getButtonWidthLayout}>
           <Animated.View style={[hbs.bgFill, getProgressStyles()]} />
-          <Text style={hbs.text}>{`${GOAL.ACTIONS.PRESS_AND_HOLD} ${
-            isIncrementer ? GOAL.ACTIONS.INCREMENT : GOAL.ACTIONS.DECREMENT
-          }`}</Text>
+          <Text
+            style={{...hbs.text, color: isReseter ? '#E7F6F2' : 'black'}}>{`${
+            GOAL.ACTIONS.PRESS_AND_HOLD
+          } ${isReseter ? GOAL.ACTIONS.RESET : GOAL.ACTIONS.INCREMENT}`}</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>

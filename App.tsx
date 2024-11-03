@@ -18,7 +18,7 @@ const App = (): React.JSX.Element => {
   return (
     <Provider store={store}>
       <View style={{height: '100%', width: '100%'}}>
-        <StatusBar backgroundColor={COLOR_CONSTANTS.STATUS_BAR} />
+        <StatusBar backgroundColor={'#1A1A1D'} />
         <AppHeader />
         <GoalsHomeScreen />
       </View>

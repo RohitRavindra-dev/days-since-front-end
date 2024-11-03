@@ -4,6 +4,7 @@ import {goalCardStyles as gs} from './styles';
 import {GOAL} from '../../assets/constants';
 import {HoldToTrigger} from './action-buttons/HoldToTrigger';
 import {GoalInfoDto} from '../../dtos/GoalDto';
+import AutoIncrementIcon from '../../assets/svgs/AutoIncIcon';
 
 export const GoalCard = ({
   goalName,
@@ -15,6 +16,12 @@ export const GoalCard = ({
 }: GoalInfoDto) => {
   return (
     <View style={gs.card}>
+      {isAutoIncremented && (
+        <View style={gs.autoIncrementBadge}>
+          <AutoIncrementIcon />
+          <Text style={gs.autoIncrText}>Auto</Text>
+        </View>
+      )}
       <View style={gs.cardContents}>
         <Text style={gs.title} numberOfLines={1} ellipsizeMode="tail">
           {goalName}
@@ -42,7 +49,7 @@ export const GoalCard = ({
       </View>
       <View style={gs.actionContainer}>
         <HoldToTrigger
-          isIncrementer={isAutoIncremented}
+          isReseter={isAutoIncremented}
           goalId={goalId}
           onCompletionHandler={(goalId: string, isIncrement: boolean) => {
             Alert.alert(

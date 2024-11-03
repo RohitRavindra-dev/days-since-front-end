@@ -17,13 +17,14 @@ export const TechnicalErrorScreen = ({retryCallback}: TechnicalErrorProps) => {
         alignItems: 'center',
         padding: 16,
         position: 'absolute',
-        top: '22%',
+        top: '20%',
       }}>
       {/* <ErrorIcon /> */}
       <ErrorIconAlt />
       <Text
         style={{
-          color: '#9290C3',
+          color: '#EBD3F8',
+          letterSpacing: 0.6,
           fontSize: 16,
           fontWeight: 500,
           flexWrap: 'wrap',
@@ -32,7 +33,9 @@ export const TechnicalErrorScreen = ({retryCallback}: TechnicalErrorProps) => {
         }}>
         {ERROR_CONSTANTS.TITLE}
       </Text>
-      <TouchableOpacity onPress={retryCallback}>
+      <TouchableOpacity
+        onPress={retryCallback}
+        style={{width: '100%', alignItems: 'center'}}>
         <View
           style={{
             backgroundColor: '#7A1CAC',
@@ -40,6 +43,10 @@ export const TechnicalErrorScreen = ({retryCallback}: TechnicalErrorProps) => {
             paddingVertical: 12,
             borderRadius: 8,
             marginTop: '15%',
+            width: '85%',
+            justifyContent: 'center',
+            alignContent: 'center',
+            alignItems: 'center',
           }}>
           <Text style={{color: '#EBD3F8', fontSize: 20, fontWeight: '700'}}>
             {ERROR_CONSTANTS.REFRESH}

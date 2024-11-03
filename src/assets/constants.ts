@@ -19,9 +19,9 @@ export const GOAL = {
   CUR_STREAK: 'Current Streak',
   LAST_UPDATED: 'Last updated:',
   ACTIONS: {
-    PRESS_AND_HOLD: 'Press and Hold Me to',
-    INCREMENT: 'Increment Goal',
-    DECREMENT: 'Reset Goal',
+    PRESS_AND_HOLD: 'Press and Hold to',
+    INCREMENT: 'Increment this Goal',
+    RESET: 'Reset this Goal',
   },
 };
 
