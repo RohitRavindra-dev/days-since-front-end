@@ -25,6 +25,13 @@ export const GOAL = {
   },
 };
 
+export const ADD_GOAL = {
+  TITLE: 'Add a New Goal?',
+  GOAL_NAME: 'New Goal Name',
+  AUTO_INCREMENT: 'Increment daily?',
+  CREATE_GOAL: 'Create this goal',
+};
+
 export const ERROR_CONSTANTS = {
   TITLE: 'Some Technical Error has occured!\nPlease try refreshing',
   REFRESH: 'Refresh',

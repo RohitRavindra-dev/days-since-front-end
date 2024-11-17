@@ -36,6 +36,16 @@ export const GoalsHomeScreen = () => {
     setisAddingGoal(prev => !prev);
   };
 
+  const createGoalCallback = (goalName: string, isAutoGoal: boolean) => {
+    console.log('New goal data:', goalName, 'Auto:', isAutoGoal);
+    setisAddingGoal(false);
+  };
+
+  //Todo
+  const goalValidation = (goalName: string) => {
+    return true;
+  };
+
   useEffect(() => {
     dispatch(fetchGoalsList());
   }, [dispatch]);
@@ -47,14 +57,11 @@ export const GoalsHomeScreen = () => {
     console.log('Goals home: ', goalsList);
   }, [fetchStatus]);
 
-  const refreshHandler = () => {
-    dispatch(fetchGoalsList());
-  };
-
   return (
-    <View style={[screenStyles.body, {opacity: isAddingGoal ? 0.75 : 1}]}>
+    <View style={[screenStyles.body]}>
+      {isAddingGoal && <View style={screenStyles.opaqueView}></View>}
       {fetchStatus.status === API_STATUS.ERROR ? (
-        <TechnicalErrorScreen retryCallback={refreshHandler} />
+        <TechnicalErrorScreen retryCallback={onRefresh} />
       ) : (
         <ScrollView
           style={screenStyles.goalsList}
@@ -74,7 +81,12 @@ export const GoalsHomeScreen = () => {
         </ScrollView>
       )}
       {!isAddingGoal && <AddGoalFab onClick={toggleAddModal} />}
-      <AddModal isOpen={isAddingGoal} onClose={toggleAddModal} />
+      <AddModal
+        isOpen={isAddingGoal}
+        onClose={toggleAddModal}
+        onCreate={createGoalCallback}
+        validator={goalValidation}
+      />
     </View>
   );
 };
@@ -92,5 +104,12 @@ const screenStyles = StyleSheet.create({
   },
   cardCntr: {
     paddingBottom: 18,
+  },
+  opaqueView: {
+    backgroundColor: '#000000',
+    width: '100%',
+    height: '100%',
+    zIndex: 10,
+    opacity: 0.65,
   },
 });
