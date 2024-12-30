@@ -64,6 +64,7 @@ export const AddModal = ({
             onChangeText={santitizedSetGoal}
             value={goalName}
             placeholder={ADD_GOAL.GOAL_NAME}
+            placeholderTextColor={'black'}
             keyboardType="name-phone-pad"
             autoFocus
             autoCapitalize="words"
