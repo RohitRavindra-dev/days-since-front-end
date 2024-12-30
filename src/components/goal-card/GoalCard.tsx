@@ -5,6 +5,7 @@ import {GOAL} from '../../assets/constants';
 import {HoldToTrigger} from './action-buttons/HoldToTrigger';
 import {GoalInfoDto} from '../../dtos/GoalDto';
 import AutoIncrementIcon from '../../assets/svgs/AutoIncIcon';
+import {formatTimestamp} from '../../utils/textUtils';
 
 export const GoalCard = ({
   goalName,
@@ -40,12 +41,13 @@ export const GoalCard = ({
             <Text style={gs.streakTextMax}>{GOAL.MAX_STREAK}</Text>
           </View>
         </View>
-        <View style={gs.lastUpdatedCntr}>
-          <Text
-            style={
-              gs.lastUpdated
-            }>{`${GOAL.LAST_UPDATED} ${lastUpdated}`}</Text>
-        </View>
+        {lastUpdated && (
+          <View style={gs.lastUpdatedCntr}>
+            <Text style={gs.lastUpdated}>{`${
+              GOAL.LAST_UPDATED
+            } ${formatTimestamp(lastUpdated)}`}</Text>
+          </View>
+        )}
       </View>
       <View style={gs.actionContainer}>
         <HoldToTrigger

@@ -13,10 +13,15 @@ import {dummyGoals} from '../assets/data/dummyGoals';
 import {AddGoalFab} from '../components/fab/AddGoalFab';
 import {AddModal} from '../components/add-modal/AddModal';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchGoalsList} from '../store/reducers/goals/thunks';
+import {
+  addNewGoal,
+  fetchGoalsList,
+  saveGoalsToStorage,
+} from '../store/reducers/goals/thunks';
 import {AppDispatch, RootState} from '../store/highCommand';
 import {API_STATUS} from '../dtos/ApiStatusDto';
 import {TechnicalErrorScreen} from './TechnicalErrorScreen';
+import {buildGoalInfo} from '../services/response/transformers/GoalsTransformer';
 
 export const GoalsHomeScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,8 +41,9 @@ export const GoalsHomeScreen = () => {
     setisAddingGoal(prev => !prev);
   };
 
-  const createGoalCallback = (goalName: string, isAutoGoal: boolean) => {
-    console.log('New goal data:', goalName, 'Auto:', isAutoGoal);
+  const createGoalCallback = (goalName: string, isAutoIncremented: boolean) => {
+    console.log('New goal data:', goalName, 'Auto:', isAutoIncremented);
+    dispatch(addNewGoal(buildGoalInfo(goalName, isAutoIncremented)));
     setisAddingGoal(false);
   };
 
@@ -45,6 +51,14 @@ export const GoalsHomeScreen = () => {
   const goalValidation = (goalName: string) => {
     return true;
   };
+
+  // Save goals to storage whenever it changes
+  useEffect(() => {
+    console.log('Goals list changed!');
+    if (goalsList.length > 0) {
+      dispatch(saveGoalsToStorage());
+    }
+  }, [goalsList]);
 
   useEffect(() => {
     dispatch(fetchGoalsList());
@@ -72,7 +86,10 @@ export const GoalsHomeScreen = () => {
             <Text>App is Loading!</Text>
           ) : (
             goalsList.map((goal, index) => (
-              <View style={screenStyles.cardCntr} id={`${index}`}>
+              <View
+                style={screenStyles.cardCntr}
+                id={`${index}`}
+                key={`${index}`}>
                 <GoalCard {...goal} />
               </View>
             ))
@@ -81,12 +98,14 @@ export const GoalsHomeScreen = () => {
         </ScrollView>
       )}
       {!isAddingGoal && <AddGoalFab onClick={toggleAddModal} />}
-      <AddModal
-        isOpen={isAddingGoal}
-        onClose={toggleAddModal}
-        onCreate={createGoalCallback}
-        validator={goalValidation}
-      />
+      {isAddingGoal && (
+        <AddModal
+          isOpen={isAddingGoal}
+          onClose={toggleAddModal}
+          onCreate={createGoalCallback}
+          validator={goalValidation}
+        />
+      )}
     </View>
   );
 };

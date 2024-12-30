@@ -26,7 +26,7 @@ export const AddModal = ({
   onCreate,
   validator,
 }: AddModalProps) => {
-  const [isAutoGoal, setIsAutoGoal] = useState(false);
+  const [isAutoGoal, setIsAutoGoal] = useState(true);
   const [goalName, setGoalName] = useState('');
   const [isValid, setIsValid] = useState(false);
 
@@ -40,7 +40,7 @@ export const AddModal = ({
   };
 
   const resetState = () => {
-    setIsAutoGoal(false);
+    setIsAutoGoal(true);
     setGoalName('');
     setIsValid(false);
     onClose();

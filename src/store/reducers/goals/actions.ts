@@ -2,6 +2,7 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {API_STATUS, ApiError, ApiRespStatus} from '../../../dtos/ApiStatusDto';
 import {GoalInfoDto} from '../../../dtos/GoalDto';
 import {GoalsState} from './goalReducer';
+import {UpdatePortfolio} from '../../../dtos/AdditionStatus';
 
 // Redux Toolkit allows us to write "mutating" logic in reducers. It
 // doesn't actually mutate the state because it uses the Immer library,
@@ -20,6 +21,10 @@ export type SetGoalsPayload = {
 
 export type SetErrorPayload = {
   apiError: ApiError;
+};
+
+export type SetUpdatePayload = {
+  updatePortfolio: UpdatePortfolio;
 };
 
 export const setGoalsAction = (
@@ -41,4 +46,11 @@ export const failedGoalsFetchAction = (
     status: API_STATUS.ERROR,
     error: action.payload.apiError,
   };
+};
+
+export const updatePorfolioAction = (
+  state: GoalsState,
+  action: PayloadAction<SetUpdatePayload>,
+) => {
+  state.updatePorfolio = action.payload.updatePortfolio;
 };

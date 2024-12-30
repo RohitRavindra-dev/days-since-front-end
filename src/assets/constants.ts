@@ -36,3 +36,7 @@ export const ERROR_CONSTANTS = {
   TITLE: 'Some Technical Error has occured!\nPlease try refreshing',
   REFRESH: 'Refresh',
 };
+
+export const LOCAL_STORAGE = {
+  GOALS_LIST: 'GoalsList',
+};

@@ -3,6 +3,6 @@ export type GoalInfoDto = {
   goalName: string;
   currentStreak: number;
   maxStreak: number;
-  lastUpdated?: string;
+  lastUpdated: string;
   isAutoIncremented: boolean;
 };
