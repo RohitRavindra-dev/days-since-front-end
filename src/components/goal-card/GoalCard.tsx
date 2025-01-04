@@ -6,6 +6,9 @@ import {HoldToTrigger} from './action-buttons/HoldToTrigger';
 import {GoalInfoDto} from '../../dtos/GoalDto';
 import AutoIncrementIcon from '../../assets/svgs/AutoIncIcon';
 import {formatTimestamp} from '../../utils/textUtils';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../store/highCommand';
+import {resetGoal} from '../../store/reducers/goals/thunks';
 
 export const GoalCard = ({
   goalName,
@@ -15,6 +18,16 @@ export const GoalCard = ({
   lastUpdated,
   isAutoIncremented,
 }: GoalInfoDto) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onCompletionHandler = (goalId: string, isIncrement: boolean) => {
+    Alert.alert(
+      `Goal id: ${goalId} has been ${isIncrement ? 'Incremented' : 'Reset'}`,
+      'Done bro, now let go!',
+    );
+    dispatch(resetGoal(goalId));
+  };
+
   return (
     <View style={gs.card}>
       {isAutoIncremented && (
@@ -53,14 +66,7 @@ export const GoalCard = ({
         <HoldToTrigger
           isReseter={isAutoIncremented}
           goalId={goalId}
-          onCompletionHandler={(goalId: string, isIncrement: boolean) => {
-            Alert.alert(
-              `Goal id: ${goalId} has been ${
-                isIncrement ? 'Incremented' : 'Reset'
-              }`,
-              'Done bro, now let go!',
-            );
-          }}
+          onCompletionHandler={onCompletionHandler}
         />
       </View>
     </View>

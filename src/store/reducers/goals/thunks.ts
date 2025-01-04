@@ -123,6 +123,64 @@ export const addNewGoal = createAsyncThunk(
   },
 );
 
+export const resetGoal = createAsyncThunk(
+  'goals/reset-goal',
+  async (goalId: string, thunkApi) => {
+    try {
+      thunkApi.dispatch(
+        updateStatus({
+          updatePortfolio: {
+            status: UpdateStatus.IN_PROGRESS,
+            type: UpdateVariant.MODIFY_EXISTING,
+          },
+        }),
+      );
+      //@ts-expect-error
+      const {goals}: {goals: GoalsState} = thunkApi.getState();
+      const {goalsList} = goals;
+      const myGoalIndex = goalsList.findIndex(goal => goal.goalId == goalId);
+      if (myGoalIndex === -1) {
+        throw new Error('Unable to reset goal, not found!');
+      }
+      thunkApi.dispatch(
+        goalsFetched({
+          goals: [
+            ...goalsList.slice(0, myGoalIndex),
+            {
+              ...goalsList[myGoalIndex],
+              currentStreak: 1,
+              lastUpdated: `${Date.now()}`,
+            },
+            ...goalsList.slice(myGoalIndex + 1),
+          ],
+          responseStatus: {
+            responseCode: 200,
+          },
+        }),
+      );
+
+      thunkApi.dispatch(
+        updateStatus({
+          updatePortfolio: {
+            status: UpdateStatus.SUCCESS,
+            type: UpdateVariant.ADD_NEW,
+          },
+        }),
+      );
+    } catch (error) {
+      thunkApi.dispatch(
+        updateStatus({
+          updatePortfolio: {
+            status: UpdateStatus.FAILED,
+            type: UpdateVariant.MODIFY_EXISTING,
+            errorMessage: `${error}`,
+          },
+        }),
+      );
+    }
+  },
+);
+
 export const clearAllGoals = createAsyncThunk(
   'goals/clear-goals',
   async (__BUNDLE_START_TIME__, thunkApi) => {
