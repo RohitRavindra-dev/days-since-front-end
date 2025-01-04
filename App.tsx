@@ -13,6 +13,7 @@ import {AppHeader} from './src/components/header/AppHeader';
 import {GoalsHomeScreen} from './src/screens/GoalsHomeScreen';
 import {Provider} from 'react-redux';
 import {store} from './src/store/highCommand';
+import Toast from 'react-native-toast-message';
 
 const App = (): React.JSX.Element => {
   return (
@@ -21,6 +22,7 @@ const App = (): React.JSX.Element => {
         <StatusBar backgroundColor={'#1A1A1D'} />
         <AppHeader />
         <GoalsHomeScreen />
+        <Toast />
       </View>
     </Provider>
   );

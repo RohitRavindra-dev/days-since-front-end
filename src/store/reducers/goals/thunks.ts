@@ -122,3 +122,21 @@ export const addNewGoal = createAsyncThunk(
     }
   },
 );
+
+export const clearAllGoals = createAsyncThunk(
+  'goals/clear-goals',
+  async (__BUNDLE_START_TIME__, thunkApi) => {
+    try {
+      thunkApi.dispatch(
+        goalsFetched({
+          goals: [],
+          responseStatus: {
+            responseCode: 200,
+          },
+        }),
+      );
+    } catch (error) {
+      console.error('Error while trying to clear all goals: ', error);
+    }
+  },
+);

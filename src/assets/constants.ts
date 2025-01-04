@@ -40,3 +40,5 @@ export const ERROR_CONSTANTS = {
 export const LOCAL_STORAGE = {
   GOALS_LIST: 'GoalsList',
 };
+
+export const REQUIRED_TAPS = 7;
